@@ -1,5 +1,7 @@
 import pytest
 
+from QL_project.pages.basket_page import BasketPage
+from QL_project.pages.locators import ProductPageLocators
 from QL_project.pages.product_page import ProductPage
 
 @pytest.mark.parametrize('promo', ["?promo=offer0", "?promo=offer1",
@@ -27,3 +29,12 @@ def test_guest_can_add_product_to_basket(browser, promo):
 #     product_page = ProductPage(browser, link)
 #     product_page.open()
 #     product_page.should_be_product_page()
+
+def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
+    link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at" \
+           "-work_207/"
+    product_page = ProductPage(browser, link)
+    product_page.open()
+    product_page.go_to_basket(*ProductPageLocators.BASKET_BUTTON)
+    page = BasketPage(browser, browser.current_url)
+    page.check_basket()

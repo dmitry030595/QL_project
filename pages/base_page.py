@@ -42,3 +42,7 @@ class BasePage():
         except TimeoutException:
             return True
         return False
+
+    def go_to_basket(self, how, what):
+        button_basket = self.browser.find_element(how, what)
+        button_basket.click()
