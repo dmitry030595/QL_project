@@ -1,3 +1,7 @@
+from selenium.common import TimeoutException
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
 from QL_project.pages.base_page import BasePage
 from QL_project.pages.locators import ProductPageLocators
 
@@ -26,6 +30,19 @@ class ProductPage(BasePage):
             *ProductPageLocators.COST_PRODUCT_IN_BASKET)
         cost_in_basket = cost_in_basket.text
         assert cost == cost_in_basket, 'Error in costs of product'
+
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(
+            *ProductPageLocators.SUCCESS_MESSAGE), \
+            "Success message is presented, but should not be"
+
+    def is_disappeared(self, how, what, timeout=4):
+        try:
+            WebDriverWait(self.browser, timeout, 1, TimeoutException). \
+                until_not(EC.presence_of_element_located((how, what)))
+        except TimeoutException:
+            return False
+        return True
 
     def should_be_product_page(self):
         self.should_be_add_to_basket_button()
