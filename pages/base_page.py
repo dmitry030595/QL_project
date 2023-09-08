@@ -4,6 +4,8 @@ from selenium.common import NoSuchElementException, NoAlertPresentException, \
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+from QL_project.pages.locators import BasePageLocators
+
 
 class BasePage():
     def __init__(self, browser, url, timeout=10):
@@ -46,3 +48,8 @@ class BasePage():
     def go_to_basket(self, how, what):
         button_basket = self.browser.find_element(how, what)
         button_basket.click()
+
+    def should_be_authorized_user(self):
+        assert self.is_element_present(
+            *BasePageLocators.USER_ICON), "User icon is not presented," \
+                                          " probably unauthorised user"

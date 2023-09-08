@@ -14,6 +14,10 @@ class BasketPageLocators():
 class LoginPageLocators():
     LOGIN_FORM = (By.CSS_SELECTOR, "#login_form")
     REGISTER_FORM = (By.CSS_SELECTOR, "#register_form")
+    EMAIL_FIELD = (By.NAME, "registration-email")
+    PASSWORD_FIELD = (By.NAME, "registration-password1")
+    CONFIRM_PASSWORD_FIELD = (By.NAME, "registration-password2")
+    REG_BUTTON = (By.NAME, "registration_submit")
 
 
 class ProductPageLocators():
@@ -24,3 +28,6 @@ class ProductPageLocators():
     COST_PRODUCT_IN_BASKET = (By.XPATH, "//div[@class='alertinner ']/p/strong")
     SUCCESS_MESSAGE = (By.CLASS_NAME, "alertinner ")
     BASKET_BUTTON = (By.XPATH, "//span[@class='btn-group']/a")
+
+class BasePageLocators():
+    USER_ICON = (By.CSS_SELECTOR, ".icon-user")

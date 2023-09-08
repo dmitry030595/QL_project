@@ -1,8 +1,12 @@
+import time
+
 import pytest
 
+from QL_project.pages.base_page import BasePage
 from QL_project.pages.basket_page import BasketPage
 from QL_project.pages.locators import ProductPageLocators
 from QL_project.pages.product_page import ProductPage
+from QL_project.pages.login_page import LoginPage
 
 @pytest.mark.parametrize('promo', ["?promo=offer0", "?promo=offer1",
                                    "?promo=offer2", "?promo=offer3",
@@ -38,3 +42,32 @@ def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
     product_page.go_to_basket(*ProductPageLocators.BASKET_BUTTON)
     page = BasketPage(browser, browser.current_url)
     page.check_basket()
+
+
+@pytest.mark.login_user
+class TestUserAddToBasketFromProductPage():
+    @pytest.fixture(scope="function", autouse=True)
+    def setup(self, browser):
+        self.browser = browser
+        link = "http://selenium1py.pythonanywhere.com/ru/accounts/login/"
+        page = LoginPage(self.browser, link)
+        page.open()
+        email = str(time.time()) + "@fakemail.org"
+        password = "fggr345DE7878"
+        page.register_new_user(email, password)
+        page.should_be_authorized_user()
+
+    def test_user_can_add_product_to_basket(self):
+        link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/"
+        product_page = ProductPage(self.browser, link)
+        product_page.open()
+        product_page.should_be_product_page()
+
+    def test_user_cant_see_product_in_basket_opened_from_product_page(self):
+        link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/"
+        product_page = ProductPage(self.browser, link)
+        product_page.open()
+        product_page.go_to_basket(*ProductPageLocators.BASKET_BUTTON)
+        page = BasketPage(self.browser, self.browser.current_url)
+        page.check_basket()
+
