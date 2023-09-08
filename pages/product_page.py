@@ -47,6 +47,12 @@ class ProductPage(BasePage):
     def should_be_product_page(self):
         self.should_be_add_to_basket_button()
         self.add_product_to_basket()
-        # self.solve_quiz_and_get_code()
+        self.solve_quiz_and_get_code()
+        self.should_assert_name_product()
+        self.should_assert_cost_product()
+
+    def should_be_product_page_2(self):
+        self.should_be_add_to_basket_button()
+        self.add_product_to_basket()
         self.should_assert_name_product()
         self.should_assert_cost_product()

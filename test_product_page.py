@@ -8,6 +8,8 @@ from QL_project.pages.locators import ProductPageLocators
 from QL_project.pages.product_page import ProductPage
 from QL_project.pages.login_page import LoginPage
 
+
+@pytest.mark.need_review
 @pytest.mark.parametrize('promo', ["?promo=offer0", "?promo=offer1",
                                    "?promo=offer2", "?promo=offer3",
                                    "?promo=offer4", "?promo=offer5",
@@ -34,6 +36,7 @@ def test_guest_can_add_product_to_basket(browser, promo):
 #     product_page.open()
 #     product_page.should_be_product_page()
 
+@pytest.mark.need_review
 def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
     link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at" \
            "-work_207/"
@@ -45,6 +48,7 @@ def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
 
 
 @pytest.mark.login_user
+@pytest.mark.need_review
 class TestUserAddToBasketFromProductPage():
     @pytest.fixture(scope="function", autouse=True)
     def setup(self, browser):
@@ -61,7 +65,7 @@ class TestUserAddToBasketFromProductPage():
         link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/"
         product_page = ProductPage(self.browser, link)
         product_page.open()
-        product_page.should_be_product_page()
+        product_page.should_be_product_page_2()
 
     def test_user_cant_see_product_in_basket_opened_from_product_page(self):
         link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/"
