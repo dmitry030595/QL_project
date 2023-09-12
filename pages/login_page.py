@@ -10,6 +10,7 @@ class LoginPage(BasePage):
 
     def should_be_login_url(self):
         url = self.browser.current_url
+        print(url)
         assert "login" in url, "'login' not in link of login_page"
 
     def should_be_login_form(self):

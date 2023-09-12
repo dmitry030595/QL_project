@@ -36,6 +36,14 @@ class ProductPage(BasePage):
             *ProductPageLocators.SUCCESS_MESSAGE), \
             "Success message is presented, but should not be"
 
+    def should_be_login_link(self):
+        assert self.is_element_present(*ProductPageLocators.LOGIN_LINK), \
+            "Login link is not presented"
+
+    def go_to_login_page(self):
+        login_link = self.browser.find_element(*ProductPageLocators.LOGIN_LINK)
+        login_link.click()
+
     def is_disappeared(self, how, what, timeout=4):
         try:
             WebDriverWait(self.browser, timeout, 1, TimeoutException). \
@@ -56,3 +64,7 @@ class ProductPage(BasePage):
         self.add_product_to_basket()
         self.should_assert_name_product()
         self.should_assert_cost_product()
+
+    def go_to_login_page_from_product_page(self):
+        self.should_be_login_link()
+        self.go_to_login_page()

@@ -28,6 +28,7 @@ class ProductPageLocators():
     COST_PRODUCT_IN_BASKET = (By.XPATH, "//div[@class='alertinner ']/p/strong")
     SUCCESS_MESSAGE = (By.CLASS_NAME, "alertinner ")
     BASKET_BUTTON = (By.XPATH, "//span[@class='btn-group']/a")
+    LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
 
 class BasePageLocators():
     USER_ICON = (By.CSS_SELECTOR, ".icon-user")
